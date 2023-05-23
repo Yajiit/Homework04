@@ -1,3 +1,7 @@
+// STARTER CODE COMMENTS IN LOWERCASE
+// MY COMMENTS IN CAPS  -YAJIIT
+
+
 // variables to keep track of quiz state
 var currentQuestionIndex = 0;
 //time left value here
@@ -13,6 +17,7 @@ var submitBtn = document.getElementById('submit');
 var startBtn = document.getElementById('start');
 var initialsEl = document.getElementById('initials');
 var feedbackEl = document.getElementById('feedback');
+// STARTING TIMER
 var time = 12000;
 
 
