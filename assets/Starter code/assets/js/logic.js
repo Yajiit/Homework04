@@ -5,22 +5,23 @@ var currentQuestionIndex = 0;
 var timerId;
 
 // variables to reference DOM elements
-var questionsEl = document.getElementById('');
-var timerEl = document.getElementById('');
-var choicesEl = document.getElementById('');
-var submitBtn = document.getElementById('');
-var startBtn = document.getElementById('');
-var initialsEl = document.getElementById('');
-var feedbackEl = document.getElementById('');
+// ADDED ELEMENT NAMES
+var questionsEl = document.getElementById('questions');
+var timerEl = document.getElementById('time');
+var choicesEl = document.getElementById('choices');
+var submitBtn = document.getElementById('submit');
+var startBtn = document.getElementById('start');
+var initialsEl = document.getElementById('initials');
+var feedbackEl = document.getElementById('feedback');
+var time = 12000;
 
 
 function startQuiz() {
   // hide start screen
-  var startScreenEl = document.getElementById('');
-  startScreenEl.setAttribute('class', '');
-
+  var startScreenEl = document.getElementById('start-screen');
+  startScreenEl.setAttribute('class', 'hide');
   // un-hide questions section
-  questionsEl.removeAttribute('');
+  questionsEl.removeAttribute('class');
 
   // start timer
   timerId = setInterval(clockTick, 1000);
@@ -36,24 +37,26 @@ function getQuestion() {
   var currentQuestion = questions[currentQuestionIndex];
 
   // update title with current question
-  var titleEl = document.getElementById('');
-  titleEl.textContent = ; //think dot notation
+  var titleEl = document.getElementById('question-title');
+  // ADDED AFTER =
+  titleEl.textContent = currentQuestion.questions; //think dot notation
 
   // clear out any old question choices
   choicesEl.innerHTML = '';
 
   // loop over choices
-  for (var i = 0; i < ; i++) {
+  for (var i = 0; i < currentQuestion.choices.length; i++) {
     // create new button for each choice
     var choice = currentQuestion.choices[i];
-    var choiceNode = document.createElement('');
+    // DEFINED ELEMENT BUTTON
+    var choiceNode = document.createElement('button');
     choiceNode.setAttribute('class', 'choice');
-    choiceNode.setAttribute('value', choice);
-
-    choiceNode.textContent = i + 1 + '. ' + choice;
-
+    choiceNode.setAttribute('value', i);
+// ADDED PARENTHESIS TO i + 1
+    choiceNode.textContent = (i + 1) + '. ' + choice;
     // display on the page
-    choicesEl.appendChild();
+    // DEFINED ChoiceNode
+    choicesEl.appendChild(choiceNode);
   }
 }
 
@@ -66,53 +69,65 @@ function questionClick(event) {
   }
 
   // check if user guessed wrong
-  if () {
+  // ADDED VARIABLES
+  var selectedChoice = buttonEl.getAttribute('value');
+  var correctChoice = questions[currentQuestionIndex].answer;
+
+  if (selectedChoice !== correctChoice) {
+    
 
 
 
     // penalize time
-    
+    time -= 10;
   
    
 
     // display new time on page
-   
+   timerEl.textContent = time;
 
   // flash right/wrong feedback on page for half a second
- 
+ feedbackEl.textContent = 'Wrong!'
+  } else {
+    feedbackEl.textContent = 'Correct!';
+  }
+
 
   // move to next question
-  
+  currentQuestionIndex++;
 
   // check if we've run out of questions or if time ran out?
-  if () {
+  if (currentQuestionIndex >= questions.length || time <= 0) {
 
     //if it did ???
-
+    quizEnd();
   } else {
     
     // if it didnt??
+    getQuestion();    
   }
 }
 
 function quizEnd() {
   // stop timer
- 
+ clearInterval(timerId);
   // show end screen
-  var endScreenEl = document.getElementById('');
+  var endScreenEl = document.getElementById('end-screen');
   endScreenEl.removeAttribute('class');
 
   // show final score
-  var finalScoreEl = document.getElementById('');
+  var finalScoreEl = document.getElementById('final-score');
   finalScoreEl.textContent = time;
 
   // hide questions section
+  questionsEl.setAttribute('class', 'hide');
 }
 
 function clockTick() {
   // update time
+  time--;
   // decrement the variable we are using to track time
-  timerEl.textContent = ; // update out time
+  timerEl.textContent = time; // update out time
 
   // check if user ran out of time
   if (time <= 0) {
@@ -125,12 +140,12 @@ function saveHighscore() {
   var initials = initialsEl.value.trim();
 
   // make sure value wasn't empty
-  if () {
+  if (initials !== '') {
 
     // get saved scores from localstorage, or if not any, set to empty array
-    
-    var highscores =
-      JSON.parse() /* what would go inside the PARSE??*/ || [];
+    var highscores = JSON.parse(localStorage.getItem('highscores')) || [];
+    // var highscores =
+    //   JSON.parse() /* what would go inside the PARSE??*/ || [];
 
     // format new score object for current user
     var newScore = {
@@ -140,10 +155,10 @@ function saveHighscore() {
 
     // save to localstorage
     highscores.push(newScore);
-    window.localStorage.setItem('highscores', JSON.stringify(/* What would we put inside STRINGIFY? */));
+    window.localStorage.setItem('highscores', JSON.stringify(highscores));
 
     // redirect to next page
-    window.location.href = '';
+    window.location.href = './highscores.html';
   }
 }
 
