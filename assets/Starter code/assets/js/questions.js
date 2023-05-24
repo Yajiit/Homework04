@@ -3,11 +3,11 @@ var questions = [
   {
     title: 'Test Question',
     choices: ['placeholder 1', 'placeholder 2', 'placeholder 3', 'placeholder 4'],
-    answer: 'placeholder 1',
+    answer: '0',
   },
   {
-    title: 'Test Question 2',
-    choices: ['placeholder 1', 'placeholder 2', 'placeholder 3', 'placeholder 4'],
-    answer: 'placeholder 2',
+    title: 'CLICK 2',
+    choices: ['WRONG 1', 'CLICK ME', 'placeholder 3', 'placeholder 4'],
+    answer: '1',
   },
 ];

@@ -44,7 +44,7 @@ function getQuestion() {
   // update title with current question
   var titleEl = document.getElementById('question-title');
   // ADDED AFTER =
-  titleEl.textContent = currentQuestion.questions; //think dot notation
+  titleEl.textContent = currentQuestion.title; //think dot notation
 
   // clear out any old question choices
   choicesEl.innerHTML = '';
@@ -79,28 +79,27 @@ function questionClick(event) {
   var correctChoice = questions[currentQuestionIndex].answer;
 
   if (selectedChoice !== correctChoice) {
-    
-
-
-
-    // penalize time
+     // penalize time
     time -= 10;
-  
-   
 
     // display new time on page
    timerEl.textContent = time;
 
   // flash right/wrong feedback on page for half a second
- feedbackEl.textContent = 'Wrong!'
+ feedbackEl.textContent = 'Wrong!';
+ feedbackEl.setAttribute('class', 'feedback wrong');
+
   } else {
     feedbackEl.textContent = 'Correct!';
-  }
+    feedbackEl.setAttribute('class', 'feedback correct');
+  
 
 
   // move to next question
+  // PUT INTO ELSE-CURLY SO QUIZ ONLY ADVANCES ON CORRECT ANSWER
   currentQuestionIndex++;
-
+  
+  }
   // check if we've run out of questions or if time ran out?
   if (currentQuestionIndex >= questions.length || time <= 0) {
 
