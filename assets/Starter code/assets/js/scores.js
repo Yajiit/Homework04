@@ -12,6 +12,16 @@ function printHighscores() {
     var liTag = document.createElement('li');
     liTag.textContent = highscores[i].initials + ' - ' + highscores[i].score;
 
+    // ADDING STYLE TO TOP THREE SCORES
+    if (i === 0) {
+      liTag.classList.add('first-score');
+    }
+    if (i === 1) {
+      liTag.classList.add('second-score');
+    }
+    if (i === 2) {
+      liTag.classList.add('third-score');
+    }
     // display on page
     var olEl = document.getElementById('highscores');
     olEl.appendChild(liTag);

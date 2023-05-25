@@ -17,7 +17,7 @@ var submitBtn = document.getElementById('submit');
 var startBtn = document.getElementById('start');
 var initialsEl = document.getElementById('initials');
 var feedbackEl = document.getElementById('feedback');
-// STARTING TIMER
+// STARTING TIMER NUMBER
 var time = 120;
 var feedbackTimer;
 
@@ -88,24 +88,8 @@ function questionClick(event) {
     // CLEARS THE .500 SECOND TIMER ON CORRECT/WRONG FEEDBACK
     clearTimeout(feedbackTimer);
 
-  if (selectedChoice !== correctChoice) {
-     // penalize time
-    time -= 10;
-
-    // display new time on page
-   timerEl.textContent = time;
-
-
-  // flash right/wrong feedback on page for half a second
- feedbackEl.textContent = 'Wrong!';
- feedbackEl.setAttribute('class', 'feedback wrong');
-//  ADDED DELAYED FUNCTION WITH SETTIMEOUT TO REMOVE AFTER HALF SECOND
-feedbackTimer = setTimeout(function () {
-  feedbackEl.textContent = '';
-  feedbackEl.removeAttribute('class');
-}, 500);
- 
-  } else {
+   // CHANGED IF CONDITIONAL TO CHECK ARRAY TO ALLOW FOR MULTIPLE POSSIBLE CORRECT ANSWERS ALSO FLIPPED CORRECT/INCORRECT'S POSITIONING IN THE IF/ELSE
+  if (correctChoice.includes(selectedChoice)) {
     feedbackEl.textContent = 'Correct!';
     feedbackEl.setAttribute('class', 'feedback correct');
     //  ADDED DELAYED FUNCTION WITH SETTIMEOUT TO REMOVE AFTER HALF SECOND
@@ -119,7 +103,25 @@ feedbackTimer = setTimeout(function () {
   // PUT INTO ELSE-CURLY SO QUIZ ONLY ADVANCES ON CORRECT ANSWER
   currentQuestionIndex++;
   
-  }
+  } else {
+    // penalize time
+   time -= 10;
+
+   // display new time on page
+  timerEl.textContent = time;
+
+
+ // flash right/wrong feedback on page for half a second
+feedbackEl.textContent = 'Wrong!';
+feedbackEl.setAttribute('class', 'feedback wrong');
+//  ADDED DELAYED FUNCTION WITH SETTIMEOUT TO REMOVE AFTER HALF SECOND
+feedbackTimer = setTimeout(function () {
+ feedbackEl.textContent = '';
+ feedbackEl.removeAttribute('class');
+}, 500);
+
+ } 
+
   // check if we've run out of questions or if time ran out?
   if (currentQuestionIndex >= questions.length || time <= 0) {
 
