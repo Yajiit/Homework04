@@ -1,0 +1,11 @@
+/* font size for top 3 high scores */
+.first-score {
+    font-size: 48px;
+  }
+  .second-score {
+    font-size: 36px;
+  }
+  .third-score {
+    font-size: 24px;
+  }
+  

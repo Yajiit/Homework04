@@ -84,18 +84,17 @@ li:nth-child(odd) {
   border-top: 2px solid #ccc;
 }
 
+/* Coloration for answer feedback */
+.feedback.correct {
+  color: green;
+}
+
+.feedback.wrong {
+  color: red;
+}
+
 .timer {
   position: absolute;
   top: 10px;
   right: 10px;
-}
-
-.first-score {
-  font-size: 48px;
-}
-.second-score {
-  font-size: 36px;
-}
-.third-score {
-  font-size: 24px;
 }
