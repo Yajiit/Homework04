@@ -18,8 +18,8 @@ var startBtn = document.getElementById('start');
 var initialsEl = document.getElementById('initials');
 var feedbackEl = document.getElementById('feedback');
 // STARTING TIMER
-var time = 12000;
-
+var time = 120;
+var feedbackTimer;
 
 function startQuiz() {
   // hide start screen
@@ -62,7 +62,10 @@ function getQuestion() {
     // display on the page
     // DEFINED ChoiceNode
     choicesEl.appendChild(choiceNode);
-  }
+
+
+
+}
 }
 
 function questionClick(event) {
@@ -73,10 +76,17 @@ function questionClick(event) {
     return;
   }
 
+
+
   // check if user guessed wrong
   // ADDED VARIABLES
   var selectedChoice = buttonEl.getAttribute('value');
   var correctChoice = questions[currentQuestionIndex].answer;
+
+
+
+    // CLEARS THE .500 SECOND TIMER ON CORRECT/WRONG FEEDBACK
+    clearTimeout(feedbackTimer);
 
   if (selectedChoice !== correctChoice) {
      // penalize time
@@ -85,14 +95,24 @@ function questionClick(event) {
     // display new time on page
    timerEl.textContent = time;
 
+
   // flash right/wrong feedback on page for half a second
  feedbackEl.textContent = 'Wrong!';
  feedbackEl.setAttribute('class', 'feedback wrong');
-
+//  ADDED DELAYED FUNCTION WITH SETTIMEOUT TO REMOVE AFTER HALF SECOND
+feedbackTimer = setTimeout(function () {
+  feedbackEl.textContent = '';
+  feedbackEl.removeAttribute('class');
+}, 500);
+ 
   } else {
     feedbackEl.textContent = 'Correct!';
     feedbackEl.setAttribute('class', 'feedback correct');
-  
+    //  ADDED DELAYED FUNCTION WITH SETTIMEOUT TO REMOVE AFTER HALF SECOND
+   feedbackTimer = setTimeout(function () {
+      feedbackEl.textContent = '';
+      feedbackEl.removeAttribute('class');
+    }, 500);
 
 
   // move to next question
@@ -132,6 +152,13 @@ function clockTick() {
   time--;
   // decrement the variable we are using to track time
   timerEl.textContent = time; // update out time
+
+
+  // SETS CLOCK RED AND BIG IN LAST 10 SECONDS
+  if (time <= 10) {
+      timerEl.style.color = '#ff0000';
+      timerEl.style.fontSize = '170%';
+  }
 
   // check if user ran out of time
   if (time <= 0) {
