@@ -9,14 +9,14 @@ This is a 10 question quiz made from provided starter code implemented in HTML/C
 ## USAGE
 
 [Link to Trivia Start Page](https://yajiit.github.io/Homework04--JS-Trivia/index.html)
-To begin click the "Start Quiz" button. You will have a 120 second time to answer 10 seconds. The quiz can only proceed on correct answers. Wrong guesses will result in a -10 second penalty to the timer.
+To begin click the "Start Quiz" button. You will have a 120 second time to answer 10 trivia questions. The questions are all multiple choice and some may have more than one correct answer. The quiz can only proceed on correct answers. Wrong guesses will result in a -10 second penalty to the timer.
 
 
 ## FEATURES
 
--High score page to track previous attempts
--Some Questions may have multiple correct answers
--Timer turns red during final 10 seconds
+- High score page to track previous attempts
+- Some Questions may have multiple correct answers
+- Timer turns red during final 10 seconds
 
 
 ## SCREENSHOT
